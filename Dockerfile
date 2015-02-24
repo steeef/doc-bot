@@ -4,10 +4,11 @@ FROM nhoag/nodejs
 MAINTAINER Stephen Price, stephen@stp5.net
 
 ENV BOTVERSION 0.0.2
-ENV BOTDIR /opt/hubot-gerty-${BOTVERSION}
+ENV BOTDIR /opt/hubot
 ENV BOTARCHIVE https://github.com/steeef/hubot-gerty/archive/${BOTVERSION}.tar.gz
 
-RUN wget -q -O - ${BOTARCHIVE} | tar xz -C /opt
+RUN mkdir -p ${BOTDIR}
+RUN wget -q -O - ${BOTARCHIVE} | tar xz --strip-components=1 -C ${BOTDIR}
 
 WORKDIR ${BOTDIR}
 
